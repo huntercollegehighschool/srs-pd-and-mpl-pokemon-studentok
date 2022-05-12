@@ -21,15 +21,15 @@ typecount = (type1count + type2count).sort_values(ascending=False)
 What is the most abundant type of Pokemon?
 
 """
+print(typecount)
 
 
 """
 2. Let's use matplotlib to create a bar chart that shows visually how many of each type there are. Use and run the code below.
+"""
 fig = plt.figure(figsize=(6, 3))
 typecount.plot.bar()
 plt.show()
-"""
-
 
 """
 Each Pokemon has 6 different stats: HP, ATTACK, DEFENSE, SPECIAL ATTACK, SPECIAL DEFENSE, and SPEED. Those stats added together is their TOTAL POINTS, which is already a column in the pokedex dataframe. The code below calculate the average total points for each type of Pokemon.
@@ -44,27 +44,28 @@ totalpoints = (tp1['total_points']['mean']*tp1['total_points']['size'] + tp2['to
 What type appears to have the lowest total points?
 
 What type appears to have the highest total points?
-
 """
 
+print(totalpoints)
 
 
 """
 4. Like you did in #2, display a bar chart that shows the type and average total points.
 """
-
+typecount.plot.bar()
+plt.show()
 
 
 
 """
 5. There's a thing in Pokemon called legendary Pokemon (like Mewtwo), mythical Pokemon (like Mew), and mega evolved Pokemon (like Mega Charizard) who's stats tend to be ridiculously high. The code below is the beginning of removing those pokemon from the dataframe. The dataframe also contains columns 'is_mythical' and 'is_mega' which denote mythical and mega evolved pokemon. Modify the code below so that all the pokemon in the aforementioned categories are removed from the dataframe.
 """
-nonspecial = pokedex[(pokedex['is_legendary']==0) & (pokedex['is_sub_legendary']==0)]
+nonspecial = pokedex[(pokedex['is_legendary']==0) & (pokedex['is_sub_legendary']==0)&(pokedex['is_mythical']==0)&(pokedex['is_mega']==0)]
 
 """
 6. Print the nonspecial pokedex. Does it even the playing field?
 """
-
+print(nonspecial)
 
 
 """
@@ -72,10 +73,13 @@ nonspecial = pokedex[(pokedex['is_legendary']==0) & (pokedex['is_sub_legendary']
 """
 
 """
-Highest Average HP:
+Highest Average HP: 
 Highest Average Attack:
 Highest Average Defense:
 Highest Average Special Attack:
 Highest Average Special Defense:
 Highest Average Speed:
 """
+attribute_list = ['hp','attack','defense','sp_attack','sp_defense','speed']
+for attribute in attribute_list:
+  average = (tp1[attribute]['mean']*tp1[attribute]['size'] + tp2[attribute]['mean']*tp2[attribute]['size'])/(tp1[attribute]['size']+tp2[attribute]['size'])
